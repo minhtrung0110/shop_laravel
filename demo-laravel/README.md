@@ -7,9 +7,11 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Website Bán Quần Áo 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Laravel là một Open source PHP Framework miễn phí được phát triển bởi Taylor Otwell ra mắt lần đầu vào tháng 6 năm 2011. Phiên bản tại thời điểm mình viết bài này là 5.2 và đang chuẩn bị ra mắt phiên bản 5.3 trong vài tuần sắp tới.
+
+Hiện tại, Laravel là PHP Framework được sử dụng phổ biến nhất trên thế giới vì những ưu điểm vượt trội tận dụng các kỹ thuật Design Pattern, các công nghệ mới nhất của PHP và rất dễ dàng tiếp cận và sử dụng nó. Điểm yếu của Laravel là không hỗ trợ các phiên bản PHP cũ vì thế các website có nền tảng PHP version thấp hơn khá là khó khi có ý định chuyển sang Laravel và phải luôn cập nhật các thông tin mới nhất về PHP để áp dụng vào Laravel. Phiên bản của Laravel hiện tại chỉ hỗ trợ phiên bản 5.5.9 trở lên.
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
 - [Powerful dependency injection container](https://laravel.com/docs/container).
@@ -19,9 +21,9 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 - [Robust background job processing](https://laravel.com/docs/queues).
 - [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+
+## Học Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
