@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Users;
 use App\Http\Controllers\Controller;
 use App\Models\c;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -20,7 +20,7 @@ class LoginController extends Controller
             'title' => 'Đăng Nhập Hệ Thống'
         ]);
     }
-
+   
     /**
      * Show the form for creating a new resource.
      *
@@ -39,7 +39,22 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $this->validate($request,[
+            'email' => 'required|email:filter|regex:/^.+@.+$/i',
+            'password' => 'required|min:5'
+        ]);
+        echo $request->input('email');
+        echo $request->input('password');
+        if (Auth::attempt(['email' =>$request->input('email') ,
+         'password' => $request->input('password')
+        ],$request->input('remember'))) {
+            // Authentication was successful...
+            return redirect()->route('admin');
+        }
+
+        return redirect()->back();
+
     }
 
     /**
