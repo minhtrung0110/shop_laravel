@@ -1,1 +1,1 @@
-<h1> WEBSITE Đang Bảo Trì</h1>
+<h1 style="text-align:center; color:red; justify-content:center"> WEBSITE Đang Bảo Trì</h1>

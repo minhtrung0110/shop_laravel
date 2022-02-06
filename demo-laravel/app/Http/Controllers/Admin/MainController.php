@@ -10,4 +10,7 @@ class MainController extends Controller
     public function index() {
         echo 'Ádmin';
     }
+    public function welcome() {
+        return view('welcome');
+    }
 }
