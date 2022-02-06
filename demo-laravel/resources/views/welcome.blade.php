@@ -130,3 +130,6 @@
         </div>
     </body>
 </html>
+
+{{ 
+ date('Y-m-d H:i:s') }}
