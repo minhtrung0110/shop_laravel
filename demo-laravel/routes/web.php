@@ -4,12 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Users\LoginController; // phải ghi App mới chạy
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\DashboardController;
+
 Route::get('/', function () {
     return view('home');
 })->name('home');
 
 
-Route::get('/admin/users/login',[LoginController::class,'index']);
+Route::get('/admin/users/login',[LoginController::class,'index'])->name('login');
 Route::post('/admin/users/login/store',[LoginController::class,'store']);
 Route::get('/admin/main',[MainController::class,'index'])->name('admin');
 
@@ -44,6 +46,7 @@ Route::prefix('member')->middleware('checkpermission')->group( function () {// P
 });
 /*--------------------------------------Handle Product CRUDF --------------------------------*/
 Route::prefix('product')->group( function(){
+
     Route::get('/',[ProductController::class,'index']);
     //Show Form Products
     Route::get('/add',[ProductController::class,'addProduct'])->name('admin.addproduct');
@@ -53,4 +56,8 @@ Route::prefix('product')->group( function(){
     Route::post('/add',[ProductController::class,'handleAddProduct']);
     Route::post('/update/{$id?}',[ProductController::class,'handleUpdateProduct']);   
     Route::delete('/delete/{$id}',[ProductController::class,'handleDeleteProduct'])->name('admin.deleteproduct');;   
+    });
+Route::middleware('checkloginadmin')->prefix('admin')->group( function(){
+    Route::get('/',[DashboardController::class,'index']);
+   
     });

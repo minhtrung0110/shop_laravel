@@ -13,6 +13,8 @@ class Kernel extends HttpKernel
      *
      * @var array<int, class-string|string>
      */
+    /*--------------------------------------------------------GLOBAL----------------------------------------------------------------*/
+    //khai báo trong phần này là global nó áp dụng lên toàn bộ code. VD khi ta mún bắt buộc user phải login vào hệ thống thì thêm vào đây//
     protected $middleware = [
         // \App\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\TrustProxies::class,
@@ -21,6 +23,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+      //  \App\Http\Middleware\CheckLoginAdmin::class,
+
     ];
 
     /**
@@ -64,5 +68,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'checkpermission' => \App\Http\Middleware\CheckPermission::class,
+        'checkloginadmin'=> \App\Http\Middleware\CheckLoginAdmin::class,
+
     ];
 }
