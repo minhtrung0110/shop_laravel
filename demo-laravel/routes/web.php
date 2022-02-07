@@ -46,11 +46,11 @@ Route::prefix('member')->middleware('checkpermission')->group( function () {// P
 Route::prefix('product')->group( function(){
     Route::get('/',[ProductController::class,'index']);
     //Show Form Products
-    Route::get('/add',[ProductController::class,'addProduct']);
-    Route::get('/update/{id}',[ProductController::class,'updateProduct']);
+    Route::get('/add',[ProductController::class,'addProduct'])->name('admin.addproduct');
+    Route::get('/update/{id?}',[ProductController::class,'updateProduct'])->name('admin.updateproduct');
     //Route::get('/delete/{$id}',[ProductController::class,'addProduct']);
     // Handle Product
     Route::post('/add',[ProductController::class,'handleAddProduct']);
-    Route::post('/update/{$id}',[ProductController::class,'handleUpdateProduct']);   
-    Route::delete('/delete/{$id}',[ProductController::class,'handleDeleteProduct']);   
+    Route::post('/update/{$id?}',[ProductController::class,'handleUpdateProduct']);   
+    Route::delete('/delete/{$id}',[ProductController::class,'handleDeleteProduct'])->name('admin.deleteproduct');;   
     });

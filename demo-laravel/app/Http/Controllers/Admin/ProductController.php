@@ -18,20 +18,20 @@ class ProductController extends Controller
     }
     // Show Form Sản Phẩm
     public function addProduct(){
-        return 'Show Form Thêm Sản Phẩm';
+        return view('admin.product.formAddProduct');
     }
-    public function updateProduct($id){
-        return 'Show Form Sửa Sản Phẩm';
+    public function updateProduct(){
+        return view('admin.product.formUpdateProduct',['id'=>2]);
     }
     public function deleteProduct($id){
         return 'Show Form Xoá Sản Phẩm';
     }
     // Handle_CRUD
     public function handleAddProduct(){
-        return 'Xữ Lý Sản Phẩm';
+        return redirect('admin.addproduct');
     }
     public function handleUpdateProduct($id){
-        return 'Xữ Lý Sản Phẩm';
+        return redirect('admin.updateproduct');
     }
     public function handleDeleteProduct($id){
         return 'Xữ Lý Sản Phẩm';
