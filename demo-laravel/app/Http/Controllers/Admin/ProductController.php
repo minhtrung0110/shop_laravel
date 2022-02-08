@@ -9,8 +9,9 @@ class ProductController extends Controller
 {
     public function _constructor(){}
 
-    public function index(){
-        return view('admin.product.listproduct');
+    public function index(Request $request){
+      
+     return view('admin.product.listproduct');
     }
 
     public function getProduct($id){
@@ -27,8 +28,8 @@ class ProductController extends Controller
         return 'Show Form Xoá Sản Phẩm';
     }
     // Handle_CRUD
-    public function handleAddProduct(){
-        return redirect('admin.addproduct');
+    public function handleAddProduct(Request $request){
+        dd($request->all());
     }
     public function handleUpdateProduct($id){
         return redirect('admin.updateproduct');

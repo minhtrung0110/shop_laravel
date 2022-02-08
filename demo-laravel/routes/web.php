@@ -45,7 +45,7 @@ Route::prefix('member')->middleware('checkpermission')->group( function () {// P
    
 });
 /*--------------------------------------Handle Product CRUDF --------------------------------*/
-Route::prefix('product')->group( function(){
+Route::prefix('admin/product')->group( function(){
 
     Route::get('/',[ProductController::class,'index']);
     //Show Form Products
