@@ -40,26 +40,31 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         
-       /* $this->validate($request,[
+        $this->validate($request,[
             'email' => 'required|email:filter|regex:/^.+@.+$/i',
             'password' => 'required|min:5'
         ]);
         $check=['email' =>$request->input('email') ,
         'password' => $request->input('password')
-    ];*/
-    //vardump($check);
-   
-    dd(Auth::attempt(['email' => 'admin@localhost.com', 'password' => '123456']));
-       /* if (Auth::attempt($check,$request->input('remember'))) {
+    ];
+        //dd(bcrypt('123456'));
+        if (Auth::attempt($check,$request->input('remember'))) {
             // Authentication was successful...
             return redirect()->route('admin');
-        }*/
+        }
+        Session()->flash('error','Email hoặc mật khẩu không chính xác!!');
+        return redirect()->back();
 
-        //return redirect()->back();
+    }
 
-    
-
-    
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\c  $c
+     * @return \Illuminate\Http\Response
+     */
+    public function show(c $c)
+    {
         //
     }
 

@@ -1,1 +1,4 @@
-<h1>DanhBoard</h1>
+@extends('admin.main');
+@section('content')
+Nội dung
+@endsection;

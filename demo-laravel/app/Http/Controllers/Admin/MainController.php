@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class MainController extends Controller
 {
     public function index() {
-        echo 'Ádmin';
+        return view('admin.main',['title'=> 'Trang Quản Trị Hệ Thống']);
     }
     public function welcome() {
         return view('welcome');
