@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Users\LoginController; // phải ghi App mới chạy
 use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\Admin\ProductControllerdemo;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MenuController;
@@ -25,7 +26,19 @@ Route::middleware('auth')->group(function (){
          Route::get('/add',[MenuController::class,'create'])->name('admin.menus.add');
          Route::post('/add',[MenuController::class,'store']);//handle
          Route::get('/list',[MenuController::class,'index']);//handle
+         Route::DELETE('/destroy',[MenuController::class,'destroy']);//handle
+         Route::get('/edit/{menu}',[MenuController::class,'show']);
+        Route::post('/edit/{menu}',[MenuController::class,'update']);//handle
          });
+         //Product
+        Route::prefix('/products')->group(function(){
+            Route::get('/add',[MenuController::class,'create'])->name('admin.prducts.add');
+            Route::post('/add',[MenuController::class,'store']);//handle
+            Route::get('/list',[MenuController::class,'index']);//handle
+            Route::DELETE('/destroy',[MenuController::class,'destroy']);//handle
+            Route::get('/edit/{menu}',[MenuController::class,'show']);
+           Route::post('/edit/{menu}',[MenuController::class,'update']);//handle
+        });
    
 
     });
@@ -67,19 +80,19 @@ Route::prefix('member')->middleware('checkpermission')->group( function () {// P
    
 });
 /*--------------------------------------Handle Product CRUDF --------------------------------*/
-Route::prefix('admin/product')->group( function(){
+/*Route::prefix('admin/product')->group( function(){
 
-    Route::get('/',[ProductController::class,'index']);
+    Route::get('/',[ProductControllerdemo::class,'index']);
     //Show Form Products
-    Route::get('/add',[ProductController::class,'addProduct'])->name('admin.addproduct');
-    Route::get('/update/{id?}',[ProductController::class,'updateProduct'])->name('admin.updateproduct');
-    //Route::get('/delete/{$id}',[ProductController::class,'addProduct']);
+    Route::get('/add',[ProductControllerdemo::class,'addProduct'])->name('admin.addproduct');
+    Route::get('/update/{id?}',[ProductControllerdemo::class,'updateProduct'])->name('admin.updateproduct');
+    //Route::get('/delete/{$id}',[ProductControllerdemo::class,'addProduct']);
     // Handle Product
-    Route::post('/add',[ProductController::class,'handleAddProduct']);
-    Route::post('/update/{$id?}',[ProductController::class,'handleUpdateProduct']);   
-    Route::delete('/delete/{$id}',[ProductController::class,'handleDeleteProduct'])->name('admin.deleteproduct');;   
+    Route::post('/add',[ProductControllerdemo::class,'handleAddProduct']);
+    Route::post('/update/{$id?}',[ProductControllerdemo::class,'handleUpdateProduct']);   
+    Route::delete('/delete/{$id}',[ProductControllerdemo::class,'handleDeleteProduct'])->name('admin.deleteproduct');;   
     });
 Route::middleware('checkloginadmin')->prefix('admin')->group( function(){
     Route::get('/',[DashboardController::class,'index']);
    
-    });
+    });*/

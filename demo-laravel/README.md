@@ -66,3 +66,21 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## MÔ TẢ
+### 3 thành phần chính vẫn là MVC:
+#### Model : Là nơi chứa các class đại diện cho các đối tượng
+#### View: Giao Diện trong Resource
+#### Controller: Controll-> Trong App/Http/
+#### Service: CRUD Database-> Trong App/Http/ .Thao tác trực tiếp với database và được điều kiển bởi controller
+Ngoài ra còn có Helper: Trong App/Helpers hỗ trợ render view
+Và Thành phần cực kỳ quan trọng không thể thiếu :
+#### Router: điều hướng trang.
+### Bên cạnh đó là thành phần khác:
+1. Middleware: xác thực 
+2. Requests
+3. database
+4. config
+5. boostrap: này ko phải là Boostrap CSS nha.
+
+

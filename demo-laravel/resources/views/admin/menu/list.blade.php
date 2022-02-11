@@ -25,7 +25,7 @@
             <th>Name</th>
             <th>Active</th>
             <th>Update</th>
-            <th>&nbsp;</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
