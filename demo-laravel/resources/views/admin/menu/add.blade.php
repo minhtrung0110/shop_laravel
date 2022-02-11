@@ -3,16 +3,19 @@
 <script src="/ckeditor/ckeditor.js"></script>
 @endsection;
 @section('content')
-<form>
+<form method="post" action="">
     <div class="card-body">
       <div class="form-group">
         <label for="menu">Tên Danh Mục</label>
-        <input type="text" class="form-control"  name='menu' id="menu" placeholder="Tên Danh Mục">
+        <input type="text" class="form-control"  name='name' id="menu" placeholder="Tên Danh Mục">
       </div>
       <div class="form-group">
         <label for="parent_id">Danh Mục Cha </label>
         <select  class="form-control"  name='parent_id'  >
-            <option value="0">Danh Mục Cha</option>
+          @foreach($menus as $menu)
+          <option value="{{$menu->id}}">{{$menu->name}}</option>
+          @endforeach
+          
         </select>
       </div>
       <div class="form-group">
@@ -36,6 +39,7 @@
           <label for="no_active" class="custom-control-label">Vô Hiệu</label>
         </div>
       </div>
+      @csrf
     </div>
     <!-- /.card-body -->
 

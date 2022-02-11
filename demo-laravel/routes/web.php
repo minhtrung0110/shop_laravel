@@ -22,8 +22,9 @@ Route::middleware('auth')->group(function (){
         Route::get('/main',[MainController::class,'index']);
         //Menu
         Route::prefix('/menus')->group(function(){
-         Route::get('/add',[MenuController::class,'create']);
-
+         Route::get('/add',[MenuController::class,'create'])->name('admin.menus.add');
+         Route::post('/add',[MenuController::class,'store']);//handle
+         Route::get('/list',[MenuController::class,'index']);//handle
          });
    
 
