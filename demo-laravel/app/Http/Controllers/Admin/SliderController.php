@@ -10,7 +10,12 @@ use App\Http\Requests\Slider\SliderRequest;
 use App\Models\Slider;
 
 class SliderController extends Controller
-{
+{   
+
+    protected $sliderService;
+    public function __construct(SliderService $sliderService){
+        $this->sliderService = $sliderService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +23,10 @@ class SliderController extends Controller
      */
     public function index()
     {
-        //
+        return view ('admin.slider.list',[
+            'title'=>'Danh Sách Các Banner',
+            'sliders'=>$this->sliderService->get()
+        ]);
     }
 
     /**
@@ -26,9 +34,13 @@ class SliderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function create()
     {
-        //
+        return view ('admin.slider.add',[
+            'title'=>'Thêm Banner',
+            //'sliders'=>$this->sliderService->get()
+        ]);
     }
 
     /**
@@ -39,7 +51,13 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $this->validate($request,[
+           'name'=>'required',
+           'thumb'=>'required',
+           'url'=>'required'
+       ]);
+       $this->sliderService->create($request);
+       return redirect('/admin/sliders/add');
     }
 
     /**
@@ -48,9 +66,12 @@ class SliderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Slider $slider)
     {
-        //
+        return view ('admin.slider.edit',[
+            'title'=>'Sửa Banner',
+            'slider'=>$slider
+        ]);
     }
 
     /**
@@ -71,9 +92,17 @@ class SliderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Slider $slider)
     {
-        //
+        
+       $this->validate($request,[
+        'name'=>'required',
+        'thumb'=>'required',
+        'url'=>'required'
+        ]);
+        $result= $this->sliderService->update($request, $slider);
+       if($result)  return redirect()->route('admin.sliders.list');
+        return redirect()->back();
     }
 
     /**
