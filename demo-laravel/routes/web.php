@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MenuController;
 
 
+
 Route::get('/', function () {
     return view('home');
 })->name('home');
@@ -32,13 +33,16 @@ Route::middleware('auth')->group(function (){
          });
          //Product
         Route::prefix('/products')->group(function(){
-            Route::get('/add',[MenuController::class,'create'])->name('admin.prducts.add');
-            Route::post('/add',[MenuController::class,'store']);//handle
-            Route::get('/list',[MenuController::class,'index']);//handle
-            Route::DELETE('/destroy',[MenuController::class,'destroy']);//handle
-            Route::get('/edit/{menu}',[MenuController::class,'show']);
-           Route::post('/edit/{menu}',[MenuController::class,'update']);//handle
+            Route::get('/add',[ProductController::class,'create'])->name('admin.products.add');
+            Route::post('/add',[ProductController::class,'store']);//handle
+
+            Route::get('/list',[ProductController::class,'index'])->name('admin.products.list');
+            Route::DELETE('/destroy',[ProductController::class,'destroy']);//handle
+            Route::get('edit/{product}',[ProductController::class,'show']);
+           Route::post('edit/{product}',[ProductController::class,'update']);//handle
         });
+        //Upload
+        Route::post('upload/services', [\App\Http\Controllers\Admin\UploadController::class, 'store']);
    
 
     });

@@ -4,9 +4,22 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Menu\CreateFormRequest;
+use App\Http\Services\Menu\MenuService;
+use App\Http\Services\Product\ProductService;
+use App\Http\Requests\Product\ProductRequest;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
+    protected $productService;
+    protected $menuService;
+
+    public function __construct(ProductService $Service,MenuService $menuService)
+    {
+        $this->productService = $Service;
+        $this->menuService = $menuService;
+        }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +27,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.product.list',[
+            'title'=>'Danh sách sản phẩm ',
+            'products'=>$this->productService->getAll(),
+            //'menus'=>$this->productService->getMenu()
+        ]);
     }
 
     /**
@@ -24,7 +41,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.product.add',[
+            'title'=>'Thêm Sản Phẩm Mới',
+            'menus'=>$this->productService->getMenu()
+        ]);
     }
 
     /**
@@ -33,9 +53,10 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $this->productService->create($request);
+        return redirect()->back();
     }
 
     /**
@@ -44,10 +65,15 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+        return view('admin.product.edit',[
+            'title'=>'Thay Đổi Thông Tin Sản Phẩm',
+            'product'=>$product,
+            'menus'=>$this->productService->getMenu()
+        ]);
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -67,9 +93,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $this->productService->update($request, $product);
+        return redirect()->route('admin.products.list');
     }
 
     /**
