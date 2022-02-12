@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\ProductControllerdemo;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MenuController;
-
+use App\Http\Controllers\Admin\SliderController;
 
 
 Route::get('/', function () {
@@ -43,6 +43,16 @@ Route::middleware('auth')->group(function (){
         });
         //Upload
         Route::post('upload/services', [\App\Http\Controllers\Admin\UploadController::class, 'store']);
+        //Slider
+        Route::prefix('/sliders')->group(function(){
+            Route::get('/add',[SliderController::class,'create'])->name('admin.sliders.add');
+            Route::post('/add',[SliderController::class,'store']);//handle
+
+            Route::get('/list',[SliderController::class,'index'])->name('admin.sliders.list');
+            Route::DELETE('/destroy',[SliderController::class,'destroy']);//handle
+            Route::get('edit/{slider}',[SliderController::class,'show']);
+           Route::post('edit/{slider}',[SliderController::class,'update']);//handle
+        });
    
 
     });

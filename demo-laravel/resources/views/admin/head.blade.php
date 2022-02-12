@@ -33,4 +33,4 @@
    <!-- summernote -->
    <link rel="stylesheet" href="../../template/admin/plugins/summernote/summernote-bs4.min.css">
    <meta name="csrf-token" content="{{ csrf_token() }}">
-   @yield('head');
+   @yield('head')

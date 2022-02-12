@@ -7,11 +7,11 @@
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
- @include('admin.navbar');
+ @include('admin.navbar')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  @include('admin.sidebar');
+  @include('admin.sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -50,6 +50,6 @@
 </div>
 <!-- ./wrapper -->
 
-@include('admin.footer');
+@include('admin.footer')
 </body>
 </html>

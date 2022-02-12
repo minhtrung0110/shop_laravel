@@ -95,8 +95,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $this->productService->update($request, $product);
-        return redirect()->route('admin.products.list');
+       $result= $this->productService->update($request, $product);
+       if($result)  return redirect()->route('admin.products.list');
+        return redirect()->back();
     }
 
     /**
@@ -105,8 +106,17 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $result = $this->productService->delete($request);
+        if($result)  {
+            return response()->json([
+                'error'=>false,
+                'message'=>'Xoá thành công!!!'
+            ]);
+        }
+        return response()->json([
+            'error'=>true
+        ]);
     }
 }
