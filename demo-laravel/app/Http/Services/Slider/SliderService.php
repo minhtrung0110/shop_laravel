@@ -5,6 +5,7 @@ use App\Models\Slider;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 
 class SliderService {
@@ -37,5 +38,17 @@ class SliderService {
             return false;
         }
         return true;/// load file JS ko dc nen ko thể update Ảnh
+    }
+
+    public function delete($request){
+        $slider=Slider::where('id',$request->input('id'))->first();
+        if($slider){
+            $path=str_replace('storage','public',$slider->thumb);
+            Storage::delete($path);
+            $slider->delete();
+
+            return true;
+        }
+        return false;
     }
 }

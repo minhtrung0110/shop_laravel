@@ -1,7 +1,7 @@
 @extends('admin.main')
 @section('head')
 <script src="/ckeditor/ckeditor.js"></script>
-@endsection;
+@endsection
 @section('content')
 <form method="post" action="">
     <div class="card-body">
@@ -50,10 +50,10 @@
       <button type="submit" class="btn btn-primary">Sửa Danh Mục</button>
     </div>
   </form>
-@endsection;
+@endsection
 
 @section('footer')
 <script >
-    CKEDITOR.replace('content');
+    CKEDITOR.replace('content')
 </script>
-@endsection;
+@endsection

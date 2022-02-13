@@ -8,13 +8,14 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\HomeController;
 
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/home_temp', function () {
+    return view('home_temp');
+})->name('welcome');
 
-
+//Login-Admin
 Route::get('/admin/users/login',[LoginController::class,'index'])->name('login');
 Route::post('/admin/users/login/store',[LoginController::class,'store']);
 /*Check  Login admin*/
@@ -57,6 +58,11 @@ Route::middleware('auth')->group(function (){
 
     });
 });
+//Client////////////////////////////////
+//Route::prefix('/')->group(function(){
+    Route::get('/',[HomeController::class,'index'])->name('home');
+
+//});
 
 
 
