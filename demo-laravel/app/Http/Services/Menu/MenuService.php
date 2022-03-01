@@ -17,6 +17,14 @@ class MenuService {
     {
         return Menu::orderbyDesc('id')->paginate(20);
     }
+    public function get()
+    {
+        return Menu::select('name','id','description','slug')->where('parent_id',0)->orderbyDesc('id')->get();
+    }
+    public function getId($id){
+            return Menu::where('id',$id)->where('active',1)->firstOrFail();
+        
+    }
     public function create($request){
         try{
             Menu::create([
@@ -59,7 +67,13 @@ class MenuService {
         Session::flash('success', 'Cập nhật thành công Danh mục');
         return true;
     }
-
+    public function getProducts($menu){
+        return $menu->products() // hàm này bên Models/Menu tạo relationship
+        ->select('id','name','price','price_sale','thumb')
+        ->where('active',1)
+        ->orderbyDesc('id')
+        ->paginate(12);
+    }
 
 
 }

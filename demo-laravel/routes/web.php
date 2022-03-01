@@ -59,10 +59,11 @@ Route::middleware('auth')->group(function (){
     });
 });
 //Client////////////////////////////////
-//Route::prefix('/')->group(function(){
-    Route::get('/',[HomeController::class,'index'])->name('home');
-
-//});
+Route::prefix('/')->group(function(){
+    Route::get('',[HomeController::class,'index'])->name('home');
+    Route::post('/services/load-product/',[HomeController::class,'loadProduct']);
+    Route::get('/products/{id}-{slug}.html', [App\Http\Controllers\MenuController::class,'index']);
+});
 
 
 

@@ -8,10 +8,22 @@ use Illuminate\Support\Str;
 
 
 class ProductService {
+    CONST LIMIT =4;
 
     public function getMenu(){
     return Menu::where('active',1)->get();
 
+    }
+    public function show($page=null){
+        return Product::select('id','name','price','price_sale','thumb')
+        ->where('active',1)
+        ->orderbyDesc('id')
+        ->when($page!=null,function($query) use ($page){
+                $offset=$page*self::LIMIT;
+                $query->offset($offset);
+        })
+        ->limit(self::LIMIT)
+        ->get();
     }
     public function getAll(){
         return Product::with('menu')->orderbyDesc('id')->paginate(15);

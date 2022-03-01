@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
 
 class Menu extends Model
 {
@@ -17,4 +18,8 @@ class Menu extends Model
         'slug',
         'active'
     ];
+
+    public function products() {
+        return $this->hasMany(Product::class,'menu_id','id');
+    }
 }

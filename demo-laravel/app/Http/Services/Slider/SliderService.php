@@ -13,6 +13,9 @@ class SliderService {
     public function get(){
        return Slider::orderbyDesc('id')->paginate(10);
     }
+    public function getAll(){
+        return Slider::orderbyDesc('sort_by')->get();
+     }
     public function create($request){
         try{
             Slider::create($request->input());
