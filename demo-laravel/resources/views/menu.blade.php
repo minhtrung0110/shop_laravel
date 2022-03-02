@@ -1,40 +1,15 @@
 @extends('main')
 
-@include('slider')
-@include('banner')
 @section('content')
-
-<section class="bg0 p-t-23 p-b-140">
+<div class="bg0 m-t-23 p-b-140 p-t-80">
     <div class="container">
-        <div class="p-b-10">
-            
-        </div>
-
         <div class="flex-w flex-sb-m p-b-52">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
                 <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-                    All Products
+                    <h3>{{$title}}</h3>
                 </button>
 
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-                    Women
-                </button>
-
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
-                    Men
-                </button>
-
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
-                    Bag
-                </button>
-
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
-                    Shoes
-                </button>
-
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
-                    Watches
-                </button>
+                
             </div>
 
             <div class="flex-w flex-c-m m-tb-10">
@@ -252,20 +227,12 @@
             </div>
         </div>
 
-        <div id="loadProduct">
-            @include('products.list')
-        </div>
+            <div id="">
+                @include('products.list')
+            </div>
+        
 
-        <!-- Load more -->
-        <div class="flex-c-m flex-w w-full p-t-45" id='btnLoadMore'>
-            <input type="hidden" value="1" id="page">
-            <a href="#" onclick="loadMore()"class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-                Load More
-            </a>
-        </div>
+        
     </div>
-</section>
-
-
+</div>
 @endsection
-

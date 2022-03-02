@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('main',[
+        return view('home',[
             'title'=>'KOF-Tresor',
             'slides'=>$this->slider->getAll(),
             'menus'=>$this->menu->get(),

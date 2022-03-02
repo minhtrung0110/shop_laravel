@@ -21,7 +21,12 @@ class MenuController extends Controller
     {
         $menu=$this->menuService->getId($id);
         $products=$this->menuService->getProducts($menu);
-        dd($products);
+        return view('menu',[
+            'title'=>$menu->name,
+            'products'=>$products,
+            'menus'=>$menu
+
+        ]);
     }
 
     /**
