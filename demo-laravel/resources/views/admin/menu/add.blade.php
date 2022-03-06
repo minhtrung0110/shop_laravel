@@ -1,4 +1,5 @@
 @extends('admin.main')
+
 @section('head')
 <script src="/ckeditor/ckeditor.js"></script>
 @endsection

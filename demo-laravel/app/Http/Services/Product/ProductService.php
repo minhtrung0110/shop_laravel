@@ -29,7 +29,20 @@ class ProductService {
         return Product::with('menu')->orderbyDesc('id')->paginate(15);
     
      }
-
+     public function getDetailProduct($id){
+         return Product::where('active',1)
+         ->where('id',$id)
+         ->with('menu')// gội hàm menu trong Model
+         ->firstOrFail();
+     }
+    public function getRelativeProduct($id='',$menu_id=''){
+        return Product::where('active',1)
+        ->where('id','!=',$id)
+        ->where('menu_id',$menu_id)
+        ->orderbyDesc('id')
+        ->limit(8)
+        ->get();
+    }
     protected function isValidPrice($request){
         $check=($request->input('price')!=0 && $request->input('price_sale')!=0 )?true:false;
         if($check &&  $request->input('price_sale') >= $request->input('price')){

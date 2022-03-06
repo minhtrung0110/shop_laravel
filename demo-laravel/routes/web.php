@@ -18,6 +18,7 @@ Route::get('/home_temp', function () {
 //Login-Admin
 Route::get('/admin/users/login',[LoginController::class,'index'])->name('login');
 Route::post('/admin/users/login/store',[LoginController::class,'store']);
+
 /*Check  Login admin*/
 Route::middleware('auth')->group(function (){
     Route::prefix('admin')->group(function(){
@@ -63,7 +64,9 @@ Route::prefix('/')->group(function(){
     Route::get('',[HomeController::class,'index'])->name('home');
     Route::post('/services/load-product/',[HomeController::class,'loadProduct']);
     Route::get('/products/{id}-{slug}.html', [App\Http\Controllers\MenuController::class,'index']);
+    Route::get('/detail-product/{id}-{slug}.html', [App\Http\Controllers\ProductController::class,'index']);
 });
+
 
 
 

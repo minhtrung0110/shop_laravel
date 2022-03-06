@@ -16,7 +16,7 @@
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
-                        <li class="active-menu"> <a href="#" class="link-home">Trang Chủ</a></li></li>
+                        <li class="active-menu"> <a href="/" class="link-home">Trang Chủ</a></li></li>
                         {!! $menuHtml!!}
                         <!--<li >
                             <a href="index.html">Home</a>

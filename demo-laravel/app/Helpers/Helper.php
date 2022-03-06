@@ -39,7 +39,7 @@ class Helper {
             if ($menu->parent_id == $parent_id) {
                 $html .= '
                     <li>
-                        <a href="/danh-muc/' . $menu->id . '-' . Str::slug($menu->name, '-') . '.html">
+                        <a href="/products/' . $menu->id . '-' . Str::slug($menu->name, '-') . '.html">
                             ' . $menu->name . '
                         </a>';
 

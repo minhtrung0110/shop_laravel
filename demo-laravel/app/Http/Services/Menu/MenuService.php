@@ -9,9 +9,8 @@ use Illuminate\Support\Str;
 class MenuService {
 
     public function getParent(){
-        return Menu::where('parent_id',0)->get();// tìm các danh muc đầu
+        return Menu::where('parent_id',0)->get();// tìm các danh muc đầu 
     }
-
 
     public function getAll()
     {
@@ -67,12 +66,17 @@ class MenuService {
         Session::flash('success', 'Cập nhật thành công Danh mục');
         return true;
     }
-    public function getProducts($menu){
-        return $menu->products() // hàm này bên Models/Menu tạo relationship
+    public function getProducts($menu,$request){
+        $query=$menu->products() // hàm này bên Models/Menu tạo relationship
         ->select('id','name','price','price_sale','thumb')
-        ->where('active',1)
+        ->where('active',1);
+        if($request->input('price')){
+                $query->orderBy('price',$request->input('price'));
+        }
+        return $query
         ->orderbyDesc('id')
-        ->paginate(12);
+        ->paginate(12)
+        ->withQueryString();
     }
 
 
