@@ -65,6 +65,8 @@ Route::prefix('/')->group(function(){
     Route::post('/services/load-product/',[HomeController::class,'loadProduct']);
     Route::get('/products/{id}-{slug}.html', [App\Http\Controllers\MenuController::class,'index']);
     Route::get('/detail-product/{id}-{slug}.html', [App\Http\Controllers\ProductController::class,'index']);
+    Route::post('/add-cart', [App\Http\Controllers\CartController::class,'index']);
+    Route::get('/carts', [App\Http\Controllers\CartController::class,'show']);
 });
 
 
