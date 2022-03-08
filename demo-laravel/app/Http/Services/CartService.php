@@ -3,8 +3,8 @@
 namespace App\Http\Services;
 
 use App\Jobs\SendMail;
-use App\Models\Cart;
-use App\Models\Customer;
+use App\Models\Order;
+use App\Models\Customers;
 use App\Models\Product;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -66,4 +66,62 @@ class CartService {
         return true;
 
     }
+    public function addCart($request){
+        try {
+            DB::beginTransaction();
+
+            $carts = Session::get('carts');
+
+            if (is_null($carts))
+                return false;
+
+            $customer = Customers::create([
+                'name' => $request->input('name'),
+                'phone' => $request->input('phone'),
+                'address' => $request->input('address'),
+                'email' => $request->input('email'),
+                'content' => $request->input('content')
+            ]);
+
+            $this->infoProductCart($carts, $customer->id);
+
+            DB::commit();
+            Session::flash('success', 'Đặt Hàng Thành Công');
+
+            #Queue
+          //  SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
+
+            Session::forget('carts');
+        } catch (\Exception $err) {
+            DB::rollBack();
+            Session::flash('error', 'Đặt Hàng Lỗi, Vui lòng thử lại sau');
+            return false;
+        }
+
+        return true;
+    }
+    protected function infoProductCart($carts, $customer_id)
+    {
+
+        $product_id=array_keys($carts);
+        $products= Product::select('id','name','thumb','price','price_sale')
+        ->where('active',1)
+        ->whereIn('id',$product_id)
+        ->get();
+
+        $data=[];
+        foreach ($products as $product){
+            $data[] = [
+                'customer_id'=>$customer_id,
+                'product_id'=>$product->id,
+                'pty'=>$carts[$product->id],
+                'price'=>$product->price_sale != 0 ? $product->price_sale : $product->price,
+
+            ];
+           
+        }
+        return Order::insert($data);
+
+    }
+
 }

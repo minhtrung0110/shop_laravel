@@ -19,14 +19,15 @@ class CartComposer
     public function compose(View $view)
     {
         $carts = Session::get('carts');
-   
-        if (is_null($carts)) return [];
+        if (is_null($carts)) $product_cart=[];
+        else {
         $product_id=array_keys($carts);
         $product_cart= Product::select('id','name','thumb','price','price_sale')
         ->where('active',1)
         ->whereIn('id',$product_id)
         ->get();
-        $view->with('product_cart', $product_cart);
-       // ->with('cart_qty_noti',$carts);
+        }
+        $view->with('product_cart', $product_cart)
+        ->with('cart_qty',$carts);
     }
 }

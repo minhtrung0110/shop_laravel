@@ -62,7 +62,10 @@ class CartController extends Controller
              'cart_qty'=>Session::get('carts'),
          ]);
     }
-
+    public function addCart(Request $request){
+        $this->cartService->addCart($request);
+        return redirect()->back();
+    }
     /**
      * Show the form for editing the specified resource.
      *

@@ -1,3 +1,4 @@
+
 <header>
     @php $menuHtml=\App\Helpers\Helper::menus($menus); 
         $num_noti_cart=\App\Helpers\Helper::getNumberCart();

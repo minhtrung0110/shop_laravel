@@ -20,7 +20,7 @@
                 @foreach($product_cart as $cart)
                 @php
                 $price = $cart->price_sale != 0 ? $cart->price_sale : $cart->price;
-                $price_product=$price *(int) $cart_qty_noti[$cart->id];
+                $price_product=$price *(int) $cart_qty[$cart->id];
                 $total+=$price_product;
                 
                 @endphp
@@ -40,6 +40,8 @@
                     </div>
                 </li>
                 @endforeach
+                @else
+                <div class="header-cart-item flex-w flex-t m-b-12"><h4>Giỏ Hàng Trống</h4></div>
                 @endif
                 
             </ul>
@@ -54,9 +56,7 @@
                         View Cart
                     </a>
 
-                    <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-                        Check Out
-                    </a>
+                   
                 </div>
             </div>
         </div>
