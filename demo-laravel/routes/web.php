@@ -67,6 +67,8 @@ Route::prefix('/')->group(function(){
     Route::get('/detail-product/{id}-{slug}.html', [App\Http\Controllers\ProductController::class,'index']);
     Route::post('/add-cart', [App\Http\Controllers\CartController::class,'index']);
     Route::get('/carts', [App\Http\Controllers\CartController::class,'show']);
+    Route::post('/update-cart', [App\Http\Controllers\CartController::class,'update']);
+    Route::get('/cart/delete/{id}', [App\Http\Controllers\CartController::class,'remove']);
 });
 
 

@@ -1,5 +1,7 @@
 <header>
-    @php $menuHtml=\App\Helpers\Helper::menus($menus); @endphp
+    @php $menuHtml=\App\Helpers\Helper::menus($menus); 
+        $num_noti_cart=\App\Helpers\Helper::getNumberCart();
+    @endphp
     <!-- Header desktop -->
     <div class="container-menu-desktop">
         <!-- Topbar -->
@@ -43,8 +45,8 @@
                         <i class="zmdi zmdi-search"></i>
                     </div>
 
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-                        <i class="zmdi zmdi-shopping-cart"></i>
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{$num_noti_cart}}">
+                       <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
 
                   

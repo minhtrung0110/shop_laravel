@@ -56,7 +56,7 @@ class CartController extends Controller
     public function show()
     {
         $product = $this->cartService->getProduct();
-         return view('carts.list',[
+              return view('carts.list',[
              'title'=>'Giỏ Hàng',
              'products'=>$product,
              'cart_qty'=>Session::get('carts'),
@@ -81,9 +81,15 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $this->cartService->update($request);
+        return redirect('/carts');
+    }
+
+    public function remove($id=0){
+        $this->cartService->remove($id);
+        return redirect('/carts');
     }
 
     /**
@@ -94,6 +100,7 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
+
 }

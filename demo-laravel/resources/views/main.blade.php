@@ -9,10 +9,9 @@
 	<!-- Header -->
 @include('header')
 
-	<!-- Cart -->
-@include('cart')
-	
+	<!-- Cart  sẽ include cart vào nếu tìm dc cách hiện popup tất cả trang-->
 
+@include('cart')
 	<!-- Product -->
 @yield('content')
 	

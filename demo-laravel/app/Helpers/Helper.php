@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Session;
 class Helper {
 
     public static function menu($menus,$parent_id=0,$char=''){
@@ -70,6 +70,11 @@ class Helper {
        if($price_sale==0) return number_format($price) ;
        return number_format($price_sale);
        return '<a href="about.html">Liên Hệ</a>';
+    }
+    public static function getNumberCart(){
+        $carts = Session::get('carts');
+        if(is_null($carts)) return 0;
+        return count($carts);
     }
 
 }

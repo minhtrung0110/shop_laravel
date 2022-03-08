@@ -43,6 +43,10 @@ class CartService {
         return true;
         
     }
+    public function update($request){
+        Session::put('carts', $request->input('num_product'));
+        return true;
+    }
     public function getProduct(){
         $carts = Session::get('carts');
         if (is_null($carts)) {
@@ -53,5 +57,13 @@ class CartService {
         ->where('active',1)
         ->whereIn('id',$product_id)
         ->get();
+    }
+    public function remove($id){
+        $carts = Session::get('carts');
+        if (is_null($carts)) return false;
+        unset($carts[$id]);
+        Session::put('carts', $carts);
+        return true;
+
     }
 }

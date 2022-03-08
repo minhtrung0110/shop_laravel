@@ -15,7 +15,7 @@
     </div>
 </div>
 @if (count($products) != 0)
-<form class="bg0 p-t-55 p-b-85 ">
+<form class="bg0 p-t-55 p-b-85 " method="post" >
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -32,20 +32,21 @@
                                 <th class="column-3">Price</th>
                                 <th class="column-4">Quantity</th>
                                 <th class="column-5">Total</th>
+                                <th class="column-6"> </th>
                             </tr>
-                            @foreach($products as $product)
+                            @foreach($products as $key => $product)
                             @php
-                            $price=\App\Helpers\Helper::price($product->price,$product->price_sale);
-                            $price_product=$price*$cart_qty[$product->id];
+                            $price = $product->price_sale != 0 ? $product->price_sale : $product->price;
+                            $price_product=$price *(int) $cart_qty[$product->id];
                             $total+=$price_product;
                             @endphp
                             <tr class="table_row">
                                 <td class="column-1">
                                     <div class="how-itemcart1">
-                                        <img src="images/item-cart-04.jpg" alt="IMG">
+                                        <img src="{{$product->thumb}}" alt="IMG">
                                     </div>
                                 </td>
-                                <td class="column-2">{{$product->name}}</td>
+                                <td class="column-2">  <a href="/detail-product/{{$product->id}}-{{\Str::slug($product->name,'-')}}.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">{{$product->name}}</td>
                                 <td class="column-3">{!! \App\Helpers\Helper::price($product->price,$product->price_sale)!!}</td>
                                 <td class="column-4">
                                     <div class="wrap-num-product flex-w m-l-auto m-r-0">
@@ -53,14 +54,17 @@
                                             <i class="fs-16 zmdi zmdi-minus"></i>
                                         </div>
 
-                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="{{$cart_qty[$product->id]}}">
+                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num_product[{{ $product->id }}]" value="{{$cart_qty[$product->id]}}">
 
                                         <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                             <i class="fs-16 zmdi zmdi-plus"></i>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="column-5">{{$price_product}}</td>
+                                <td class="column-5">{{number_format($price_product) }}</td>
+                                <td class="p-r-15">
+                                    <a href="/cart/delete/{{$product->id}}">Xoá</a>
+                                </td>
                             </tr>
                             @endforeach
                            
@@ -77,10 +81,8 @@
                                 Apply coupon
                             </div>
                         </div>
-
-                        <div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-                            Update Cart
-                        </div>
+                        @csrf
+                        <input type="submit" formaction="/update-cart" class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10"value='Update Cart'>
                     </div>
                 </div>
             </div>
@@ -100,12 +102,12 @@
 
                         <div class="size-209">
                             <span class="mtext-110 cl2">
-                                {{$total}}
+                                {{ number_format($total) }} VNĐ
                             </span>
                         </div>
                     </div>
 
-                    <div class="flex-w flex-t bor12 p-t-15 p-b-30">
+                  <!--  <div class="flex-w flex-t bor12 p-t-15 p-b-30">
                         <div class="size-208 w-full-ssm">
                             <span class="stext-110 cl2">
                                 Shipping:
@@ -147,7 +149,7 @@
                                     
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
                     <div class="flex-w flex-t p-t-27 p-b-33">
                         <div class="size-208">
@@ -158,7 +160,7 @@
 
                         <div class="size-209 p-t-1">
                             <span class="mtext-110 cl2">
-                                {{$total}}
+                                {{Number_format($total)}} VNĐ
                             </span>
                         </div>
                     </div>
