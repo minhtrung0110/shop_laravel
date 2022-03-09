@@ -87,9 +87,13 @@ class CartService {
 
             DB::commit();
             Session::flash('success', 'Đặt Hàng Thành Công');
-
+            $data_send_mail=[
+                'name'=>$request->input('name'),
+                'email'=> $request->input('email'),
+                'phone'=> $request->input('phone')
+            ];
             #Queue
-          //  SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
+            SendMail::dispatch( $data_send_mail)->delay(now()->addSeconds(5));
 
             Session::forget('carts');
         } catch (\Exception $err) {

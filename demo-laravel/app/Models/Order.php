@@ -9,6 +9,8 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $timestamp=false;
+
     protected $fillable = [
         'customer_id',
         'product_id',
