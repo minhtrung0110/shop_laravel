@@ -83,8 +83,12 @@ class CartService {
                 'content' => $request->input('content')
             ]);
 
-            $this->infoProductCart($carts, $customer->id);
-
+            $order=$this->infoProductCart($carts, $customer->id);
+            $data=[
+                'order'=>$order,
+                'customer'=>$customer
+             ];
+            //dd($data['customer']);
             DB::commit();
             Session::flash('success', 'Đặt Hàng Thành Công');
             $data_send_mail=[
@@ -92,8 +96,10 @@ class CartService {
                 'email'=> $request->input('email'),
                 'phone'=> $request->input('phone')
             ];
+           
             #Queue
-            SendMail::dispatch( $data_send_mail)->delay(now()->addSeconds(5));
+          
+            SendMail::dispatch( $data)->delay(now()->addSeconds(5));
 
             Session::forget('carts');
         } catch (\Exception $err) {
@@ -124,7 +130,8 @@ class CartService {
             ];
            
         }
-        return Order::insert($data);
+         Order::insert($data);
+         return $products;
 
     }
 

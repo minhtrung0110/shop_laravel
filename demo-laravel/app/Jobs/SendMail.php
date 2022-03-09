@@ -14,9 +14,8 @@ use Illuminate\Support\Facades\Mail;
 class SendMail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    protected  $email;
-    protected $phone;
-    protected $name;
+    protected  $customer;
+    protected $order;
     /**
      * Create a new job instance.
      *
@@ -24,11 +23,9 @@ class SendMail implements ShouldQueue
      */
     public function __construct($data)
     {
-        $this->email = $data['email'];
-        $this->phone = $data['phone'];
-        $this->name = $data['name'];
+       $this->customer = $data['customer'];
+       $this->order = $data['order'];
     }
-
     /**
      * Execute the job.
      *
@@ -36,7 +33,7 @@ class SendMail implements ShouldQueue
      */
     public function handle()
     {
-        echo $this->email;
-       Mail::to($this->email)->send(new OrderShipped($this->email, $this->phone,$this->name));
+      // dd( $this->customer->email);
+      Mail::to($this->customer['email'])->send(new OrderShipped($this->customer,$this->order));
     }
 }

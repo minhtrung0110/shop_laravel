@@ -10,19 +10,17 @@ use Illuminate\Queue\SerializesModels;
 class OrderShipped extends Mailable
 {
     use Queueable, SerializesModels;
-    protected  $email;
-    protected $phone;
-    protected $name;
+    protected  $customer;
+    protected $order;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($email,$phone,$name)
+    public function __construct($customer,$order)
     {
-        $this->email = $email;
-        $this->phone = $phone;
-        $this->name = $name;
+        $this->customer = $customer;
+        $this->order = $order;
     }
 
     /**
@@ -33,9 +31,8 @@ class OrderShipped extends Mailable
     public function build()
     {
         return $this->view('mail.success',[
-            'name'=>$this->name,
-            'phone'=>$this->phone,
-            'email'=>$this->email
+            'order'=>$this->order,
+            'customer'=>$this->customer
         ]);
     }
 }
