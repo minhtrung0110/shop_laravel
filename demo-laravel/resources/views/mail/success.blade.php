@@ -11,12 +11,14 @@
     <div>
         Ghi chú: {{$customer['content']}}.
     </div>
+    @component('mail::table')
+| Mã Sản Phẩm    |Tên Sản Phẩm        | Giá Tiền  |
+| ------------- |:-------------:| --------:|
+| Col 2 is      | Centered      | $10      |
+| Col 3 is      | Right-Aligned | $20      |
+@endcomponent
     <table>
-        <tr>
-          <th>Mã Sản Phẩm</th>
-          <th>Tên Sản Phẩm</th>
-          <th>Giá Tiền</th>
-        </tr>
+      
         @foreach($order as $item)
         @php
             $price = $item['price_sale'] != 0 ? $item['price_sale'] : $item['price'];
