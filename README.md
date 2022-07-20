@@ -5,3 +5,4 @@ Cấu trúc code có thể còn nhiều lôi.
 
 ## TEST BRANCH-PULLREQUEST
 Đã commit issue2
+git rebase
